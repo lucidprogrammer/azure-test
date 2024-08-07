@@ -4,5 +4,5 @@ metadata:
   name: kinetica-operators
   namespace: flux-system
 spec:
-  interval: 5h0m0s
+  interval: 1m
   url: https://kineticadb.github.io/charts/latest
