@@ -259,9 +259,9 @@ spec:
         hasPools: true
         clusterSize:
           # CHANGE
-          tshirtSize: "SmallCPU"
+          tshirtSize: "XS"
           # CHANGE
-          tshirtType: "XS"
+          tshirtType: "SmallCPU"
         # CHANGE
         ranksPerNode: 1
         # CHANGE
