@@ -191,7 +191,7 @@ spec:
       payAsYouGo: true
 
       azureConfig:
-        marketplaceApp:
+        managedApp:
           # CHANGE
           planId: "plan-01"
           resourceUri: "/subscriptions/00000/resourceGroups/lucid-073001/providers/Microsoft.Solutions/applications/cluster-9589"
