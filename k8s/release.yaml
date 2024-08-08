@@ -332,6 +332,8 @@ spec:
 
     dbAdminUser:
       create: true
+      name: "kadmin"
+      password: "Kinetica123!"
     dbWorkbench:
       create: true
       # CHANGE
