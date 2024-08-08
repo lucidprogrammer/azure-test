@@ -270,6 +270,7 @@ spec:
         fqdn: "cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com"
         letsEncrypt:
           enabled: true
+          environment: "production"
         # CHANGE
         license: "payg"
         # CHANGE
@@ -345,6 +346,7 @@ spec:
       deploymentInfo: '{"name": "plan-01", "product": "lucid-01-preview", "publisher": "kinetica", "version": "1.0.1", "managed_resource_group_id": "/subscriptions/000000000/resourceGroups/mrg-lucid-01-preview-20240730051440", "customer_email": "somebody@somewhere.com", "secondary_email": "somebodyelse@somewhere.com", "application_id": "/subscriptions/00000/resourceGroups/lucid-073001/providers/Microsoft.Solutions/applications/cluster-9589", "contactFirstName": "John", "contactLastName": "Some", "tshirtSize": "XS", "tshirtType": "SmallCPU"}'
       letsEncrypt:
         enabled: true
+        environment: "production"
       image:
         repository: "kinetica.azurecr.io/dev/workbench"
         tag: "v7.2.0-11.dev-4"
