@@ -180,23 +180,23 @@ spec:
         storageClass: "managed-premium"
     db:
       # do you want to provision a database
-      create: false
-      name: ""
+      create: true
+      name: "cluster-6040-d5heq2aaqsuo4"
       namespace: gpudb
       debug: false
       autoSuspend:
         enabled: false
 
       # CHANGE
-      payAsYouGo:
+      payAsYouGo: true
 
       azureConfig:
         marketplaceApp:
           # CHANGE
-          planId: ""
-          resourceUri: ""
+          planId: "plan-01"
+          resourceUri: "/subscriptions/00000/resourceGroups/lucid-073001/providers/Microsoft.Solutions/applications/cluster-9589"
         appInsights:
-          key: ""
+          key: "4ed12c09-d5f5-4cbb-9f58-1b6c59a9ba1b"
       hostManagerMonitor:
         image:
           repository: "kinetica.azurecr.io/dev/kinetica-k8s-monitor"
@@ -259,19 +259,19 @@ spec:
         hasPools: true
         clusterSize:
           # CHANGE
-          tshirtSize: ""
+          tshirtSize: "SmallCPU"
           # CHANGE
-          tshirtType: ""
+          tshirtType: "XS"
         # CHANGE
         ranksPerNode: 1
         # CHANGE
         replicas:
         # provide an fqdn if you want to use a custom fqdn
-        fqdn: ""
+        fqdn: "cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com"
         letsEncrypt:
           enabled: true
         # CHANGE
-        license: ""
+        license: "payg"
         # CHANGE
         gpuAcceleration: false
         image:
@@ -305,7 +305,7 @@ spec:
             persistTier:
               default:
                 # CHANGE
-                limit: ""
+                limit: "128Gi"
                 provisioner: "disk.csi.azure.com"
                 volumeClaim:
                   spec:
@@ -314,7 +314,7 @@ spec:
             diskCacheTier:
               default:
                 # CHANGE
-                limit: ""
+                limit: "2Ti"
                 provisioner: "disk.csi.azure.com"
                 volumeClaim:
                   spec:
@@ -325,21 +325,21 @@ spec:
               coldStorageAzure:
                 basePath: "gpudb/cold_storage/"
                 # CHANGE
-                containerName: ""
-                sasToken: ""
-                storageAccountKey: ""
-                storageAccountName: ""
+                containerName: "cluster-6040-d5heq2aaqsuo4-aks-cold"
+                sasToken: "se=2024-08-15T03%3A05Z&sp=racwdl&sv=2022-11-02&sr=c&sig=Kk%2BuXqaNEDOOB1neW7alTmhMNwHDZD4aX8zVaJm5I2g%3D"
+                storageAccountKey: "Wk40U8XcuUfj0ZN/h64G8tHcJ/UBPZPINIP2nO5TocvVAMPuvkJsWqB5/0ytfwjW56fE99on0VjQ+AStUEe11Q=="
+                storageAccountName: "kind5heq2aaqsuo4stacc"
 
     dbAdminUser:
-      create: false
+      create: true
     dbWorkbench:
-      create: false
+      create: true
       # CHANGE
-      fqdn: ""
+      fqdn: "cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com"
       # CHANGE
       # should have something like the following
       # {"name": "plan-01", "product": "lucid-01-preview", "publisher": "kinetica", "version": "1.0.1", "managed_resource_group_id": "/subscriptions/000000000/resourceGroups/mrg-lucid-01-preview-20240730051440", "customer_email": "somebody@somewhere.com", "secondary_email": "somebodyelse@somewhere.com", "application_id": "/subscriptions/00000/resourceGroups/lucid-073001/providers/Microsoft.Solutions/applications/cluster-9589", "contactFirstName": "John", "contactLastName": "Some", "tshirtSize": "XS", "tshirtType": "SmallCPU"}
-      deploymentInfo: "{}"
+      deploymentInfo: '{"name": "plan-01", "product": "lucid-01-preview", "publisher": "kinetica", "version": "1.0.1", "managed_resource_group_id": "/subscriptions/000000000/resourceGroups/mrg-lucid-01-preview-20240730051440", "customer_email": "somebody@somewhere.com", "secondary_email": "somebodyelse@somewhere.com", "application_id": "/subscriptions/00000/resourceGroups/lucid-073001/providers/Microsoft.Solutions/applications/cluster-9589", "contactFirstName": "John", "contactLastName": "Some", "tshirtSize": "XS", "tshirtType": "SmallCPU"}'
       letsEncrypt:
         enabled: true
       image:
