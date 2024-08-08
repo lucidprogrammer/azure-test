@@ -1,0 +1,797 @@
+apiVersion: app.kinetica.com/v1
+kind: KineticaCluster
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kinetica-operators
+    meta.helm.sh/release-namespace: kinetica-system
+  creationTimestamp: "2024-08-08T03:51:59Z"
+  generation: 3
+  labels:
+    app.kubernetes.io/instance: kinetica-operators
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kinetica-operators
+    helm.sh/chart: kinetica-operators-72.0.11-dev.4
+    helm.toolkit.fluxcd.io/name: kinetica-operators
+    helm.toolkit.fluxcd.io/namespace: flux-system
+  name: cluster-6040-d5heq2aaqsuo4
+  namespace: gpudb
+  resourceVersion: "790708"
+  uid: 42c9d4ce-0eed-40ee-a2f8-9062992161d9
+spec:
+  autoSuspend:
+    enabled: false
+    inactivityDuration: 1h0m0s
+  azureConfig:
+    appInsights:
+      endpoint: ""
+      key: 4ed12c09-d5f5-4cbb-9f58-1b6c59a9ba1b
+      maxBatchInterval: 10
+      maxBatchSize: 1024
+    managedApp:
+      planId: plan-01
+      resourceUri: /subscriptions/00000/resourceGroups/lucid-073001/providers/Microsoft.Solutions/applications/cluster-9589
+  debug: false
+  deploymentType:
+    region: aws_useast_1
+    type: managed_app
+  gadmin:
+    containerPort:
+      containerPort: 8080
+      name: gadmin
+      protocol: TCP
+    isEnabled: true
+  gaia:
+    admin:
+      admin_login_only_gpudb_down: true
+      admin_username: admin
+      login_animation_enabled: true
+      login_bypass_enabled: false
+      require_strong_password: true
+    demo_schema: demo
+    gpudb:
+      data_file_string_null_value: \\N
+      gpudb_ext_url: http://127.0.0.1:8082/gpudb-0
+      gpudb_url: http://127.0.0.1:9191
+      logging_log_file_name: gpudb.log
+      sample_repo_url: //s3.amazonaws.com/kinetica-ce-data
+    hm:
+      gpudb_ext_hm_url: http://127.0.0.1:8082/gpudb-host-manager
+      gpudb_hm_url: http://127.0.0.1:9300
+    http:
+      http_client_timeout: 3600
+      http_client_timeout_v2: 0
+      tomcat_path_key: tomcat
+      webapp_context: gadmin
+    is_remote: false
+    kagent_cli_path: /opt/gpudb/kagent/bin/kagent
+    kio:
+      kio_log_file_path: /opt/gpudb/kitools/kio/logs/gadmin.log
+      kio_log_level: DEBUG
+      kio_log_size_limit: 10485760
+    kisql:
+      kisql_query_results_limit: 10000
+      kisql_query_timezone: GMT
+    license:
+      status: ok
+      type: unlimited
+    max_concurrent_user_sessions: 0
+    public_schema: ki_home
+    reveal_db_info_file: /opt/gpudb/connectors/reveal/var/REVEAL_DB_DIR
+    root_schema: root
+    stats:
+      graphana_url: http://127.0.0.1:3000
+      graphite_url: http://127.0.0.1:8181
+      stats_grafana_url: http://127.0.0.1:9091
+  gpudbCluster:
+    clusterName: cluster-6040-d5heq2aaqsuo4
+    clusterSize:
+      tshirtSize: XS
+      tshirtType: SmallCPU
+    config:
+      ai:
+        apiProvider: sqlgpt
+        apiUrl: https://sqlgpt.io/api/sql/suggest
+        resources:
+          limits:
+            cpu: "16"
+            ephemeral-storage: 70Gi
+            memory: 48Gi
+            nvidia.com/gpu: "2"
+          requests:
+            cpu: "16"
+            ephemeral-storage: 70Gi
+            memory: 48Gi
+            nvidia.com/gpu: "2"
+      alertManager:
+        ipAddress: ${gaia.host0.address}
+        port: 9089
+      alerts:
+        alertDiskPercentage:
+        - 1
+        - 5
+        - 10
+        - 20
+        alertErrorMessages: true
+        alertExe: ""
+        alertHostStatus: true
+        alertHostStatusFilter: fatal_init_error
+        alertMaxStoredAlerts: 100
+        alertMemoryPercentage:
+        - 1
+        - 5
+        - 10
+        - 20
+        alertRankCudaError: true
+        alertRankFallbackAllocator: true
+        alertRankStatus: true
+        alertRankStatusFilter:
+        - fatal_init_error
+        - not_responding
+        - terminated
+        enableAlerts: true
+        traceDirectory: /tmp
+        traceEventBufferSize: 1000000
+      audit:
+        body: false
+        data: false
+        enable: false
+        headers: false
+        lock: false
+        response: false
+      events:
+        internal: false
+        ipAddress: ${gaia.host0.address}
+        port: 9080
+        statsServerNamespace: gpudb
+      externalFiles:
+        directory: /opt/gpudb/persist
+        egressParquetCompression: snappy
+        egressSingleFileMaxSize: 100
+        readerNumTasks: "-1"
+      general:
+        clusterEventTimeoutStartupRank: 300
+        concurrentKernelExecution: true
+        defaultTTL: 20
+        disableClearAll: true
+        enableOverlappedEquiJoin: true
+        enablePredicateEquiJoin: true
+        forceHostFilterExecution: false
+        maxConcurrentKernels: 0
+        maxGetRecordsSize: 20000
+        onStartupScript: ""
+        pinnedMemoryPoolSize: 2000000000
+        protectedSets: MASTER,_MASTER,_DATASOURCE
+        requestTimeout: 20
+        timeoutShutdownRank: 300
+        timeoutShutdownSubsystem: 20
+        timeoutStartupSubsystem: 60
+      graph:
+        enable: true
+        gpuList: ""
+        ipAddress: ${gaia.host0.address}
+        maxMemory: 0
+        pullPort: 8100
+        pushPort: 8099
+        timeout: 1200
+      kafka:
+        batchSize: 1000
+        pollTimeout: 0
+        waitTime: 30
+      kifs:
+        dataLimit: 4Gi
+        enable: true
+        mountPoint: /gpudb/kifs
+        useManagedCredentials: true
+      ml:
+        enable: false
+      network:
+        compressNetworkData: false
+        enableHTTPDProxy: true
+        enableWorkerHTTPServers: true
+        globalManagerLocalPubPort: 5554
+        globalManagerPortOne: 5552
+        globalManagerPubPort: 5553
+        headIPAddress: 172.20.0.10
+        headPort: 9191
+        hostManagerHTTPPort: 9300
+        httpAllowOrigin: '*'
+        httpKeepAlive: false
+        httpdProxyPort: 8082
+        httpdProxyUseHTTPS: false
+        httpsCertFile: ""
+        httpsKeyFile: ""
+        rank0IPAddress: ${gaia.rank0.host}
+        setMonitorPort: 9002
+        setMonitorProxyPort: 9003
+        setMonitorQueueSize: 1000
+        triggerPort: 9001
+        useHttps: false
+      persistence:
+        buildMaterializedViewsOnStart: on_demand
+        buildPKIndexOnStart: on_demand
+        chunkColumnMaxMemory: 8192000000
+        chunkMaxMemory: 512000000
+        chunkSize: 8000000
+        executionMode: device
+        indexDBTierByFileLength: false
+        loadVectorsOnStart: on_demand
+        persistDirectory: /opt/gpudb/persist
+        persistSyncTime: 5
+        shadowAggSize: 100000000
+        shadowCubeEnabled: true
+        shadowFilterSize: 100000000
+        smsDirectory: /opt/gpudb/persist
+        smsMaxOpenFiles: 128
+        synchronousCompression: false
+        tempDirectory: ${gaia.persist_directory}/tmp
+        textIndexDirectory: /opt/gpudb/persist
+        walChecksum: true
+        walFlushFrequency: 60
+        walMaxSegmentSize: 500000000
+        walSegmentCount: "-1"
+        walSyncPolicy: flush
+        walTruncateCorruptTablesOnStart: true
+      postgresProxy:
+        enablePostgresProxy: true
+        idleConnectionTimeout: 1200
+        maxQueuedConnections: 1
+        maxThreads: 64
+        minThreads: 2
+        port:
+          containerPort: 5432
+          name: postgres_proxy
+          protocol: TCP
+        ssl: false
+        sslCertFile: ""
+        sslKeyFile: ""
+      processes:
+        initTablesNumThreadsPerTom: 8
+        kernelOmpThreads: 3
+        maxHttpThreads: 32
+        maxTbbThreadsPerRank: "-1"
+        minHttpThreads: 8
+        smOmpThreads: 2
+        subtaskConcurrentyLimit: "-1"
+        tcsPerTom: "-1"
+        tomsPerRank: 1
+        tpsPerTom: "-1"
+      procs:
+        directory:
+          persistVolumeClaim:
+            metadata: {}
+            spec:
+              resources: {}
+            status: {}
+          volumeMount:
+            mountPath: /opt/gpudb/user-procs
+            name: tmp-name-procs
+        enable: true
+      security:
+        autoCreateExternalUsers: false
+        autoGrantExternalRoles: true
+        autoRevokeExternalRoles: true
+        enableAuthorization: true
+        enableExternalAuthentication: true
+        externalSecurity:
+          ranger:
+            authorizerAddress: ipc://${gaia.temp_directory}/gpudb-ranger-0
+            authorizerRemoteDebugPort: 0
+            authorizerTimeout: 120
+            cacheMinutes: 60
+            name: kinetica
+        minPasswordLength: 4
+        requireAuthentication: true
+        unifiedSecurityNamespace: true
+      sql:
+        address: ipc://${gaia.temp_directory}/gpudb-query-engine-0
+        costBasedOptimization: false
+        distributedJoins: true
+        distributedOperations: true
+        enablePlanner: true
+        forceBinaryJoins: false
+        forceBinarySetOps: false
+        maxParallelSteps: 4
+        maxViewNestingLevels: 16
+        pagingTableTTL: 20
+        parallelExecution: true
+        planCacheSize: 4000
+        plannerMaxMemory: 4096
+        plannerMaxStack: 6
+        plannerTimeout: 120
+        plannerWorkers: 16
+        remoteDebugPort: 5005
+        resultsCacheTTL: 60
+        resultsCaching: true
+        ruleBasedOptimization: true
+      statistics:
+        aggrRowCount: 10000
+        aggrTime: 1
+        enable: true
+        ipAddress: ${gaia.host0.address}
+        namespace: gpudb
+        port: 2003
+        retentionDays: 21
+      textSearch:
+        enableTextSearch: true
+        textIndicesPerTom: 2
+        textSearcherRefreshInterval: 20
+        useExternalTextServer: true
+      tieredStorage:
+        diskCacheTier:
+          default:
+            highWatermark: 90
+            limit: 2Ti
+            lowWatermark: 80
+            name: ""
+            path: default
+            provisioner: disk.csi.azure.com
+            volumeClaim:
+              metadata: {}
+              spec:
+                resources: {}
+                storageClassName: managed-premium
+              status: {}
+        globalTier:
+          colocateDisks: true
+          concurrentWaitTimeout: 120
+          encryptDataAtRest: true
+        persistTier:
+          default:
+            highWatermark: 90
+            limit: 128Gi
+            lowWatermark: 80
+            name: ""
+            path: default
+            provisioner: disk.csi.azure.com
+            volumeClaim:
+              metadata: {}
+              spec:
+                resources: {}
+                storageClassName: managed-premium
+              status: {}
+      tieredStrategy:
+        default: VRAM 1, RAM 5, PERSIST 5
+        predicateEvaluationInterval: 60
+      video:
+        defaultTTL: "-1"
+        maxCount: "-1"
+        tmpDir: ${gaia.temp_directory}/gpudb-temp-videos
+      visualization:
+        enableLODRendering: true
+        enableOpenGLRenderer: true
+        enableVectorTileService: false
+        lodDataExtent:
+        - -180
+        - -90
+        - 180
+        - 90
+        lodPreProcessingLevel: 5
+        lodSubRegionNum:
+        - 12
+        - 6
+        lodSubRegionResolution:
+        - 512
+        - 512
+        maxFeaturesPerTile: 200000
+        maxHeatmapSize: 3072
+        maxLODLevel: 8
+        maxVectorTileZoomLevel: 8
+        maxVerticesPerChunk: 20000000
+        minVectorTileZoomLevel: 1
+        openGLAntialiasingLevel: 0
+        pointRenderThreshold: 100000
+        renderingPrecisionThreshold: 30
+        symbolResolution: 100
+        symbolTextureSize: 4000
+        symbologyRenderThreshold: 10000
+        vectorTileMapTiler: google
+      workbench:
+        enable: false
+        port:
+          containerPort: 8000
+          name: workbench
+          protocol: TCP
+    fqdn: cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com
+    haRingName: default
+    hasPools: true
+    hostManagerPort:
+      containerPort: 9300
+      name: hostmanager
+      protocol: TCP
+    image: kinetica.azurecr.io/dev/kinetica-k8s-cpu-avx512:v7.2.0-11.dev-4
+    imagePullPolicy: IfNotPresent
+    letsEncrypt:
+      enabled: true
+      environment: staging
+    license: payg
+    livenessProbe:
+      failureThreshold: 30
+      initialDelaySeconds: 30
+      periodSeconds: 30
+    metricsRegistryRepositoryTag:
+      imagePullPolicy: IfNotPresent
+      registry: kinetica.azurecr.io
+      repository: dev/fluent-bit
+      sha: ""
+      tag: v7.2.0-11.dev-4
+    nodeSelector:
+      app.kinetica.com/pool: compute
+    podManagementPolicy: Parallel
+    ranksPerNode: 1
+    readinessProbe:
+      failureThreshold: 10
+      initialDelaySeconds: 180
+      periodSeconds: 30
+    replicas: 1
+    startupProbe:
+      failureThreshold: 10
+      initialDelaySeconds: 10
+      periodSeconds: 60
+  hostManagerMonitor:
+    db_healthz_port:
+      containerPort: 8888
+      name: db-healthz
+      protocol: TCP
+    hm_healthz_port:
+      containerPort: 8889
+      name: hm-healthz
+      protocol: TCP
+    livenessProbe:
+      failureThreshold: 30
+      initialDelaySeconds: 10
+      periodSeconds: 10
+    monitorRegistryRepositoryTag:
+      imagePullPolicy: IfNotPresent
+      registry: kinetica.azurecr.io
+      repository: dev/kinetica-k8s-monitor
+      sha: ""
+      tag: v7.2.0-11.dev-4
+    readinessProbe:
+      failureThreshold: 20
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    startupProbe:
+      failureThreshold: 20
+      initialDelaySeconds: 5
+      periodSeconds: 10
+  infra: on-prem
+  ingressController: nginx
+  ldap:
+    baseDN: dc=kinetica,dc=com
+    bindDN: cn=admin,dc=kinetica,dc=com
+    host: openldap
+    isInLocalK8S: true
+    isLDAPS: false
+    namespace: gpudb
+    port: 1389
+  payAsYouGo: true
+  reveal:
+    containerPort:
+      containerPort: 8088
+      name: reveal
+      protocol: TCP
+    isEnabled: true
+  stats:
+    alertManager:
+      args:
+      - -c
+      - /opt/gpudb/kagent/stats/alertmanager/alertmanager --config.file=/opt/gpudb/kagent/stats/alertmanager/alertmanager.yml
+        --web.listen-address=0.0.0.0:9089 --cluster.listen-address= --storage.path=/opt/gpudb/kagent/stats/storage/alertmanager/dbcluster-data
+      command:
+      - /bin/sh
+      configFile: /opt/gpudb/kagent/stats/alertmanager/alertmanager.yml
+      configFileAsConfigMap: true
+      containerPort:
+        containerPort: 9089
+        name: alertmanager
+        protocol: TCP
+      image:
+        imagePullPolicy: IfNotPresent
+        registry: docker.io
+        repository: kinetica/kagent
+        sha: ""
+        tag: 7.1.9.15.20230823123615.ga
+      isEnabled: true
+      livenessProbe:
+        failureThreshold: 5
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        tcpSocket:
+          port: alertmanager
+        timeoutSeconds: 1
+      logs: /opt/gpudb/kagent/stats/logs
+      name: stats-alertmanager
+      readinessProbe:
+        failureThreshold: 3
+        initialDelaySeconds: 10
+        periodSeconds: 30
+        successThreshold: 1
+        tcpSocket:
+          port: alertmanager
+        timeoutSeconds: 1
+      resources:
+        limits:
+          cpu: 250m
+          memory: 1Gi
+        requests:
+          cpu: 250m
+          memory: 1Gi
+      storagePath: /opt/gpudb/kagent/stats/storage/alertmanager/
+      webConfigFile: /opt/gpudb/kagent/stats/alertmanager/alertmanager-web-config.yml
+      webListenAddress: 0.0.0.0:9089
+    grafana:
+      args:
+      - -c
+      - /opt/gpudb/kagent/stats/grafana/bin/grafana-server -config=/opt/gpudb/kagent/stats/grafana/conf/defaults.ini
+        -homepath=/opt/gpudb/kagent/stats/grafana
+      command:
+      - /bin/sh
+      configFile: /opt/gpudb/kagent/stats/grafana/conf/grafana.ini
+      configFileAsConfigMap: true
+      containerPort:
+        containerPort: 9091
+        name: grafana
+        protocol: TCP
+      homePath: /opt/gpudb/kagent/stats/grafana
+      host: 0.0.0.0
+      image:
+        imagePullPolicy: IfNotPresent
+        registry: docker.io
+        repository: kinetica/kagent
+        sha: ""
+        tag: 7.1.9.15.20230823123615.ga
+      isEnabled: true
+      livenessProbe:
+        failureThreshold: 5
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        tcpSocket:
+          port: grafana
+        timeoutSeconds: 1
+      logs: /opt/gpudb/kagent/stats/logs
+      name: stats-grafana
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /robots.txt
+          port: grafana
+          scheme: HTTP
+        initialDelaySeconds: 10
+        periodSeconds: 30
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        limits:
+          cpu: 250m
+          memory: 1Gi
+        requests:
+          cpu: 250m
+          memory: 1Gi
+    isEnabled: true
+    loki:
+      args:
+      - -c
+      - /opt/gpudb/kagent/stats/loki/loki -config.expand-env=true -config.file=/opt/gpudb/kagent/stats/loki/loki.yml
+      command:
+      - /bin/sh
+      configFile: /opt/gpudb/kagent/stats/loki/loki.yml
+      configFileAsConfigMap: true
+      containerPort:
+        containerPort: 9080
+        name: loki
+        protocol: TCP
+      env:
+      - name: LOKI_HTTP_PORT
+        value: "9080"
+      - name: LOKI_STORAGE
+        value: /opt/gpudb/kagent/stats/storage/loki-storage
+      expandEnv: true
+      image:
+        imagePullPolicy: IfNotPresent
+        registry: docker.io
+        repository: kinetica/kagent
+        sha: ""
+        tag: 7.1.9.15.20230823123615.ga
+      isEnabled: true
+      livenessProbe:
+        failureThreshold: 5
+        httpGet:
+          path: /ready
+          port: loki
+          scheme: HTTP
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      logs: /opt/gpudb/kagent/stats/logs
+      name: stats-loki
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /ready
+          port: loki
+          scheme: HTTP
+        initialDelaySeconds: 10
+        periodSeconds: 30
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        limits:
+          cpu: 250m
+          memory: 1Gi
+        requests:
+          cpu: 250m
+          memory: 1Gi
+      storage: /opt/gpudb/kagent/stats/storage/loki-storage
+    pool: compute
+    prometheus:
+      args:
+      - -c
+      - /opt/gpudb/kagent/stats/prometheus/prometheus --log.level=debug --config.file=/opt/gpudb/kagent/stats/prometheus/prometheus.yml
+        --web.listen-address=0.0.0.0:9090 --storage.tsdb.path=/opt/gpudb/kagent/stats/storage/prometheus-storage
+        --storage.tsdb.retention.time=7d  --web.enable-lifecycle
+      command:
+      - /bin/sh
+      configFile: /opt/gpudb/kagent/stats/prometheus/prometheus.yml
+      configFileAsConfigMap: true
+      containerPort:
+        containerPort: 9090
+        name: prometheus
+        protocol: TCP
+      image:
+        imagePullPolicy: IfNotPresent
+        registry: docker.io
+        repository: kinetica/kagent
+        sha: ""
+        tag: 7.1.9.15.20230823123615.ga
+      isEnabled: true
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: prometheus
+          scheme: HTTP
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      logLevel: debug
+      logs: /opt/gpudb/kagent/stats/logs
+      name: stats-prometheus
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: prometheus
+          scheme: HTTP
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        limits:
+          cpu: 250m
+          memory: 2Gi
+        requests:
+          cpu: 250m
+          memory: 2Gi
+      storageTSDBPath: /opt/gpudb/kagent/stats/storage/prometheus-storage
+      storageTSDBRetentionTime: 7d
+      timings:
+        evaluationInterval: 30s
+        scrapeInterval: 30s
+        scrapeTimeout: 10s
+    sharedPV: true
+    sharedPVResources:
+      limits:
+        storage: 100Gi
+      requests:
+        storage: 10Gi
+  supportingImages:
+    busybox:
+      imagePullPolicy: IfNotPresent
+      registry: kinetica.azurecr.io
+      repository: dev/busybox
+      sha: ""
+      tag: v7.2.0-11.dev-4
+    socat:
+      imagePullPolicy: IfNotPresent
+      registry: kinetica.azurecr.io
+      repository: dev/socat
+      sha: ""
+      tag: v7.2.0-11.dev-4
+status:
+  cloudProvider: Azure AKS
+  cloudRegion: eastus2
+  clusterSize:
+    tshirtSize: XS
+    tshirtType: SmallCPU
+  currentReplicas: 1
+  firstStartComplete: true
+  hmStatus:
+    cluster_leader: 10.244.2.15
+    cluster_operation: none
+    graph:
+      graph:
+        status: started
+    graph_status: ""
+    host_httpd_status: running
+    host_mode: run
+    host_num_gpus: "0"
+    host_pid: 216460
+    host_stats_status: running
+    host_status: started_systems
+    hostname: gpudb-0
+    hosts:
+      host0:
+        graph_status: ""
+        host_httpd_status: running
+        host_mode: run
+        host_pid: 216460
+        host_stats_status: running
+        host_status: started_systems
+        ml_status: disabled
+        query_planner_status: running
+        reveal_status: running
+    license_expiration: "3000-01-01"
+    license_status: ok
+    license_type: key-enterprise
+    ml_status: disabled
+    query_planner_status: running
+    ranks:
+      rank0:
+        mode: run
+        pid: 225460
+        status: started_systems
+      rank1:
+        mode: run
+        pid: 225717
+        status: starting_systems
+    reveal_status: running
+    system_idle_time: "0"
+    system_mode: run
+    system_rebalancing: 0
+    system_status: stopped
+    text:
+      text0:
+        status: running
+    version: 7.2.0.11.20240710091748
+  ingressUrls:
+    aaw: https://cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com/cluster-6040-d5heq2aaqsuo4/aaw
+    dbMonitor: cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com:9002
+    files: https://cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com/files
+    gadmin: https://cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com/gadmin
+    postgresProxy: cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com:5432
+    ranks:
+      "0": https://cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com/cluster-6040-d5heq2aaqsuo4/gpudb-0
+      "1": https://cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com/cluster-6040-d5heq2aaqsuo4/gpudb-1
+    reveal: https://cluster-6040-d5heq2aaqsuo4.eastus2.cloudapp.azure.com/reveal
+  internalIngressUrls:
+    aaw: ""
+    dbMonitor: ""
+    files: ""
+    gadmin: ""
+    postgresProxy: ""
+    ranks:
+      "0": http://cluster-6040-d5heq2aaqsuo4-rank0-service.gpudb.svc:8082/gpudb-0
+      "1": http://cluster-6040-d5heq2aaqsuo4-rank1-service.gpudb.svc:8082/gpudb-1
+    reveal: ""
+  isFreeSaaS: false
+  options:
+    ram_limit: 108055111270
+  outstandingBillableHour:
+  - billable: true
+    billed: false
+    billedAt: "2024-08-08T03:59:59Z"
+    duration: 59m59.999999999s
+    end: "2024-08-08T03:59:59Z"
+    start: "2024-08-08T03:00:00Z"
+  - billable: true
+    billed: false
+    billedAt: "2024-08-08T04:01:59Z"
+    duration: 1h0m0s
+    end: "2024-08-08T04:59:59Z"
+    start: "2024-08-08T04:00:00Z"
+  phase: Running
