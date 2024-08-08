@@ -320,15 +320,15 @@ spec:
                   spec:
                     storageClassName: managed-premium
 
-            coldStorageTier:
-              coldStorageType: azure_blob
-              coldStorageAzure:
-                basePath: "gpudb/cold_storage/"
-                # CHANGE
-                containerName: "cluster-6040-d5heq2aaqsuo4-aks-cold"
-                sasToken: "se=2024-08-15T03%3A05Z&sp=racwdl&sv=2022-11-02&sr=c&sig=Kk%2BuXqaNEDOOB1neW7alTmhMNwHDZD4aX8zVaJm5I2g%3D"
-                storageAccountKey: "Wk40U8XcuUfj0ZN/h64G8tHcJ/UBPZPINIP2nO5TocvVAMPuvkJsWqB5/0ytfwjW56fE99on0VjQ+AStUEe11Q=="
-                storageAccountName: "kind5heq2aaqsuo4stacc"
+            # coldStorageTier:
+            #   coldStorageType: azure_blob
+            #   coldStorageAzure:
+            #     basePath: "gpudb/cold_storage/"
+            #     # CHANGE
+            #     containerName: "cluster-6040-d5heq2aaqsuo4-aks-cold"
+            #     sasToken: "se=2024-08-15T03%3A05Z&sp=racwdl&sv=2022-11-02&sr=c&sig=Kk%2BuXqaNEDOOB1neW7alTmhMNwHDZD4aX8zVaJm5I2g%3D"
+            #     storageAccountKey: "Wk40U8XcuUfj0ZN/h64G8tHcJ/UBPZPINIP2nO5TocvVAMPuvkJsWqB5/0ytfwjW56fE99on0VjQ+AStUEe11Q=="
+            #     storageAccountName: "kind5heq2aaqsuo4stacc"
 
     dbAdminUser:
       create: true
