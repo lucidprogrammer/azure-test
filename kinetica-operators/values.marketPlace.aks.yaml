@@ -5,7 +5,7 @@ environment: "marketPlace"
 # onPrem Providers: "k3s" "kind" "eks" "aks"
 # saas Providers: eks
 # marketPlace Providers: aks eks
-provider: eks
+provider: aks
 
 # clusterName and clusterRegion are used only when environment is marketPlace and provider is eks
 # its used in the monitoring related configmaps
@@ -33,8 +33,8 @@ wbOperator:
     digest: ""
 dbOperator:
   install: true
-  # optional: aadpodidbinding is required when environment is marketPlace and provider is aks
-  aadpodidbinding: ""
+  # optional: AzureWorkloadIdentityClientID is required when environment is marketPlace and provider is aks
+  AzureWorkloadIdentityClientID: ""
   image:
     repository: "kinetica.azurecr.io/dev/kinetica-k8s-operator"
     tag: "v7.2.0-11.dev-4-operator"
@@ -82,18 +82,9 @@ ingressNginx:
 
     service:
       externalTrafficPolicy: Local
-      targetPorts:
-        https: 80
       annotations:
-        "service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout": 3600
-        "service.beta.kubernetes.io/aws-load-balancer-type": nlb
-        "service.beta.kubernetes.io/aws-load-balancer-nlb-target-type": ip
-        "service.beta.kubernetes.io/aws-load-balancer-alpn-policy": HTTP2Preferred
-        "service.beta.kubernetes.io/aws-load-balancer-scheme": internet-facing
-        "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled": true
-        "service.beta.kubernetes.io/aws-load-balancer-ssl-ports": "443"
-        "service.beta.kubernetes.io/aws-load-balancer-ssl-cert": ""
-
+        service.beta.kubernetes.io/azure-load-balancer-internal: "${AZURE_LOAD_BALANCER_INTERNAL}"
+        service.beta.kubernetes.io/azure-dns-label-name: "${AZURE_DNS_LABEL_NAME}"
     metrics:
       enabled: true
       service:
@@ -179,7 +170,7 @@ openldap:
     existingClaim: ""
     accessMode: "ReadWriteOnce"
     size: "1Gi"
-    storageClass: "gp2"
+    storageClass: "managed-premium"
 db:
   # do you want to provision a database
   create: true
@@ -192,13 +183,13 @@ db:
   # CHANGE
   payAsYouGo:
 
-  awsConfig:
-    # CHANGE
-    clusterName: ""
+  azureConfig:
     marketplaceApp:
       # CHANGE
-      productCode: ""
-      publicKeyVersion: 1
+      planId: ""
+      resourceUri: ""
+    appInsights:
+      key: ""
   hostManagerMonitor:
     image:
       repository: "kinetica.azurecr.io/dev/kinetica-k8s-monitor"
@@ -271,7 +262,7 @@ db:
     # provide an fqdn if you want to use a custom fqdn
     fqdn: ""
     letsEncrypt:
-      enabled: false
+      enabled: true
     # CHANGE
     license: ""
     # CHANGE
@@ -308,26 +299,29 @@ db:
           default:
             # CHANGE
             limit: ""
-            provisioner: "kubernetes.io/aws-ebs"
+            provisioner: "disk.csi.azure.com"
             volumeClaim:
               spec:
-                storageClassName: gp2
+                storageClassName: managed-premium
 
         diskCacheTier:
           default:
             # CHANGE
             limit: ""
-            provisioner: "kubernetes.io/aws-ebs"
+            provisioner: "disk.csi.azure.com"
             volumeClaim:
               spec:
-                storageClassName: gp2
+                storageClassName: managed-premium
 
         coldStorageTier:
-          coldStorageType: s3
-          coldStorageS3:
-            basePath: "gpudb/cold-storage/"
+          coldStorageType: azure_blob
+          coldStorageAzure:
+            basePath: "gpudb/cold_storage/"
             # CHANGE
-            bucketName: ""
+            containerName: ""
+            sasToken: ""
+            storageAccountKey: ""
+            storageAccountName: ""
 
 dbAdminUser:
   create: true
@@ -336,11 +330,11 @@ dbWorkbench:
   # CHANGE
   fqdn: ""
   # CHANGE
+  # should have something like the following
+  # {"name": "plan-01", "product": "lucid-01-preview", "publisher": "kinetica", "version": "1.0.1", "managed_resource_group_id": "/subscriptions/000000000/resourceGroups/mrg-lucid-01-preview-20240730051440", "customer_email": "somebody@somewhere.com", "secondary_email": "somebodyelse@somewhere.com", "application_id": "/subscriptions/00000/resourceGroups/lucid-073001/providers/Microsoft.Solutions/applications/cluster-9589", "contactFirstName": "John", "contactLastName": "Some", "tshirtSize": "XS", "tshirtType": "SmallCPU"}
   deploymentInfo: "{}"
   letsEncrypt:
-    enabled: false
-  useHttps: true
-  nodeSelector: {}
+    enabled: true
   image:
     repository: "kinetica.azurecr.io/dev/workbench"
     tag: "v7.2.0-11.dev-4"
