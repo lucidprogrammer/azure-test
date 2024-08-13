@@ -4,7 +4,9 @@ metadata:
   name: kinetica-operators
   namespace: flux-system
 spec:
-  interval: 30m
+  install:
+    createNamespace: true
+  interval: 1m
   releaseName: kinetica-operators
   targetNamespace: kinetica-system
   chart:
