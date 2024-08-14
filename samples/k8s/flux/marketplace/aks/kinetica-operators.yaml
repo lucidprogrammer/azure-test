@@ -203,7 +203,7 @@ spec:
     dbWorkbench:
       create: true
       fqdn: "${KINETICA_CLUSTER_NAME}.${LOCATION}.cloudapp.azure.com"
-      deploymentInfo: '{"name": "${PLAN_ID}", "product": "${PRODUCT_NAME}", "publisher": "kinetica", "version": "${PLAN_VERSION}", "managed_resource_group_id": "/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${MANAGED_APP_RESOURCE_GROUP_NAME}", "customer_email": "${CONTACT_EMAIL}", "application_id": "/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${MANAGED_APP_RESOURCE_GROUP_NAME}/providers/microsoft.solutions/applications/${MANAGED_APP_NAME}", "contactFirstName": "${CONTACT_FIRST_NAME}", "contactLastName": "${CONTACT_LAST_NAME}", "tshirtSize": "${TSHIRT_SIZE}", "tshirtType": "${TSHIRT_TYPE}"}'
+      deploymentInfo: '{"name": "${PLAN_ID}", "product": "${PRODUCT_NAME}", "publisher": "kinetica", "version": "${PLAN_VERSION}", "managed_resource_group_id": "/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP_NAME}", "customer_email": "${CONTACT_EMAIL}", "application_id": "/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${MANAGED_APP_RESOURCE_GROUP_NAME}/providers/microsoft.solutions/applications/${MANAGED_APP_NAME}", "contactFirstName": "${CONTACT_FIRST_NAME}", "contactLastName": "${CONTACT_LAST_NAME}", "tshirtSize": "${TSHIRT_SIZE}", "tshirtType": "${TSHIRT_TYPE}"}'
       letsEncrypt:
         enabled: true
         environment: "production"
