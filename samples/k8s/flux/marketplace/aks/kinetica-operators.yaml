@@ -25,10 +25,8 @@ spec:
       install: true
     dbOperator:
       install: true
-      image:
-        repository: "kinetica.azurecr.io/dev/kinetica-k8s-operator"
-        tag: "v0.0.0-operator"
-      AzureWorkloadIdentityClientID: "${AZURE_WORKLOAD_IDENTITY_CLIENTID}"
+      azureWorkloadIdentityClientId: "${AZURE_WORKLOAD_IDENTITY_CLIENTID}"
+      webhookUrl: "${WEBHOOK_URL}"
 
     certManager:
       install: true
@@ -140,7 +138,7 @@ spec:
       azureConfig:
         managedApp:
           planId: "${PLAN_ID}"
-          resourceUri: "/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${MANAGED_APP_RESOURCE_GROUP_NAME}/providers/microsoft.solutions/applications/${MANAGED_APP_NAME}"
+          resourceUri: "/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${MANAGED_APP_RESOURCE_GROUP_NAME}/providers/Microsoft.Solutions/applications/${MANAGED_APP_NAME}"
         appInsights:
           key: "${APP_INSIGHTS_KEY}"
 
