@@ -64,7 +64,7 @@ spec:
           externalTrafficPolicy: Local
           annotations:
             service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-            service.beta.kubernetes.io/azure-dns-label-name: "${KINETICA_CLUSTER_NAME}"
+            service.beta.kubernetes.io/azure-dns-label-name: "${AZURE_DNS_LABEL_NAME}"
         metrics:
           enabled: true
           service:
