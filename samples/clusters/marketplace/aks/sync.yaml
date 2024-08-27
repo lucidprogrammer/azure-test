@@ -24,7 +24,7 @@ spec:
         name: kinetica-operators
       patch: |
         - op: add
-          path: /spec/values/ingress-nginx.controller.service.annotations/service.beta.kubernetes.io~1azure-dns-label-name
+          path: /spec/values/ingress-nginx/controller/service/annotations/service.beta.kubernetes.io~1azure-dns-label-name
           value: "${AZURE_DNS_LABEL_NAME}"
 
 ---
