@@ -23,6 +23,7 @@ spec:
     createNamespace: true
   releaseName: cert-manager
   targetNamespace: kinetica-system
+  interval: 1m
   chart:
     spec:
       chart: ./kinetica-operators/charts/cert-manager
