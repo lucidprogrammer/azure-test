@@ -39,6 +39,7 @@ spec:
           bucket: ${BACKUP_CONTAINER_NAME}
           config:
             storageAccount: ${STORAGE_ACCOUNT_NAME}
+            resourceGroup: ${RESOURCE_GROUP_NAME}
       volumeSnapshotLocation:
         - provider: azure
           config:
