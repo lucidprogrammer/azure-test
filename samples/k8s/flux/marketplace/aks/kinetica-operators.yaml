@@ -13,7 +13,7 @@ spec:
     namespace: flux-system
   timeout: 5m
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: cert-manager
@@ -46,7 +46,7 @@ spec:
       nodeSelector:
         "app.kinetica.com/pool": "infra"
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: kinetica-operators
