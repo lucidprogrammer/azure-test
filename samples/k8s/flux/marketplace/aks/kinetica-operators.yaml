@@ -45,6 +45,7 @@ spec:
           config:
             resourceGroup: ${RESOURCE_GROUP_NAME}
             subscriptionId: ${SUBSCRIPTION_ID}
+            useAAD: "true"
     initContainers:
       - name: velero-plugin-for-microsoft-azure
         image: velero/velero-plugin-for-microsoft-azure:v1.10.0
@@ -57,8 +58,11 @@ spec:
           AZURE_SUBSCRIPTION_ID=${SUBSCRIPTION_ID}
           AZURE_RESOURCE_GROUP=${RESOURCE_GROUP_NAME}
           AZURE_CLOUD_NAME=AzurePublicCloud
+    podLabels:
+      azure.workload.identity/use: "true"
     serviceAccount:
       server:
+        name: velero
         annotations:
           azure.workload.identity/client-id: "${AZURE_WORKLOAD_IDENTITY_CLIENTID}"
 
