@@ -40,12 +40,13 @@ spec:
           config:
             storageAccount: ${STORAGE_ACCOUNT_NAME}
             resourceGroup: ${RESOURCE_GROUP_NAME}
+            useAAD: "true"
       volumeSnapshotLocation:
         - provider: azure
           config:
             resourceGroup: ${RESOURCE_GROUP_NAME}
             subscriptionId: ${SUBSCRIPTION_ID}
-            useAAD: "true"
+
     initContainers:
       - name: velero-plugin-for-microsoft-azure
         image: velero/velero-plugin-for-microsoft-azure:v1.10.0
