@@ -45,4 +45,4 @@ spec:
   postBuild:
     substituteFrom:
       - kind: ConfigMap
-        name: velero-values
+        name: operator-values
