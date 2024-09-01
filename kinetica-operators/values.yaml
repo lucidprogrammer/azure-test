@@ -244,7 +244,7 @@ db:
       cuda:
         image:
           repository: "kinetica.azurecr.io/dev/kinetica-k8s-cuda"
-          tag: "v7.2.0-11.dev-6-amd64"
+          tag: "v7.2.0-11.dev-6"
       standard:
         image:
           # you should be able to use kinetica.azurecr.io/dev/kinetica-k8s-cpu-avx512:v7.2.0-11.dev-6 also
