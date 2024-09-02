@@ -26,6 +26,9 @@ spec:
         - op: add # service.beta.kubernetes.io/azure-load-balancer-ipv4
           path: /spec/values/ingress-nginx/controller/service/annotations/service.beta.kubernetes.io~1azure-load-balancer-ipv4
           value: "${AZURE_INTERNAL_LB_IP}"
+        - op: add # service.beta.kubernetes.io/azure-load-balancer-internal-subnet
+          path: /spec/values/ingress-nginx/controller/service/annotations/service.beta.kubernetes.io~1azure-load-balancer-internal-subnet
+          value: "${AZURE_INTERNAL_LB_SUBNET}"
 
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
