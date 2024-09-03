@@ -1,8 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: kinetica-operators
-  namespace: flux-system
-spec:
-  interval: 1m
-  url: https://kineticadb.github.io/charts/latest
